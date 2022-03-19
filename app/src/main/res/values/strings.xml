@@ -8,11 +8,9 @@
     <string name="password_text">Password:</string>
     <string name="forgot_pw">Forgot?</string>
     <string name="change_pw">Change?</string>
-    <string name="jc_title">Title</string>
-    <string name="jc_by_line">Poster - 01/01/2001</string>
-    <string name="jc_desc">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nisi mauris, euismod in enim in, varius scelerisque orci. Nulla non magna ut dui condimentum semper. Maecenas facilisis nisl id libero mollis fermentum. Maecenas convallis justo eu enim iaculis, eu egestas ex placerat. Aenean libero leo, maximus non lectus vel, fermentum gravida ipsum. Nam turpis nibh, suscipit sed elementum nec, accumsan sed nulla. Fusce faucibus augue sed turpis finibus cursus. Maecenas eget mollis mi, quis dignissim libero. Vestibulum vitae rutrum eros. Cras quis magna id quam dapibus scelerisque. In ultrices dapibus felis, nec auctor est feugiat at. Ut dapibus libero a velit convallis luctus.
-    </string>
+    <string name="jc_title">%1$s</string>
+    <string name="jc_by_line">%1$s - %2$s</string>
+    <string name="jc_desc">%1$s</string>
     <string name="jc_button">Apply</string>
 
 </resources>
