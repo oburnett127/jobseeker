@@ -8,4 +8,9 @@
     <string name="password_text">Password:</string>
     <string name="forgot_pw">Forgot?</string>
     <string name="change_pw">Change?</string>
+    <string name="jc_title">%1$s</string>
+    <string name="jc_by_line">%1$s - %2$s</string>
+    <string name="jc_desc">%1$s</string>
+    <string name="jc_button">Apply</string>
+
 </resources>
