@@ -24,10 +24,17 @@ public class MainActivity extends AppCompatActivity {
                 openUserProfile();
             }
         });
+
+        binding.jobFeedButton.setOnClickListener(v -> openJobFeed());
     }
 
     private void openUserProfile() {
         listIntent = new Intent(this, UserProfileActivity.class);
+        startActivity(listIntent);
+    }
+
+    private void openJobFeed(){
+        listIntent = new Intent(this, JobFeedActivity.class);
         startActivity(listIntent);
     }
 }
