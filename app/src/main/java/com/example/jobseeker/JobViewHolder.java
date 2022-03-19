@@ -14,9 +14,10 @@ public class JobViewHolder extends RecyclerView.ViewHolder{
 
         this.binding = binding;
 
-        // TODO: Put logic for job card buttons here
+        // TODO: Put logic for "apply" here
     }
 
+    // helper method to populate Job Card fields with data from Job
     void bindTo(Job job){
         Context ctx = binding.title.getContext();
         binding.title

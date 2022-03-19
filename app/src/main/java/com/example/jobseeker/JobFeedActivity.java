@@ -24,8 +24,6 @@ public class JobFeedActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         Job[] jobs = getJobs(NUM_OF_POSTS);
 
-        Log.d("job array", Arrays.toString(jobs));
-
         JobAdapter adapter = new JobAdapter(getLayoutInflater(), jobs);
 
         binding.jobfeed.setLayoutManager(new LinearLayoutManager(this));
@@ -33,6 +31,7 @@ public class JobFeedActivity extends AppCompatActivity {
 
     }
 
+    // TODO remove or modify these two methods after job CRUD is implemented
     private Job[] getJobs(int numOfJobs){
         Job[] jobs = new Job[numOfJobs];
 
@@ -48,8 +47,7 @@ public class JobFeedActivity extends AppCompatActivity {
         String title = "Sample Job Title #" + index;
         String desc = "Job Desc #" + index + "\n- Duties: lorem ipsum\n- Pay: $100,000\n- Requirements: lorem ipsum";
         String date = "01/01/2001";
-        Job j = new Job(emp, title, desc, date);
-        Log.d("job", j.toString());
-        return j;
+
+        return new Job(emp, title, desc, date);
     }
 }

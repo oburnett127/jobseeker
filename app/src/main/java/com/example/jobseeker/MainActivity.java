@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // open jobs feed page once user clicks jobFeed button
         binding.jobFeedButton.setOnClickListener(v -> openJobFeed());
     }
 
