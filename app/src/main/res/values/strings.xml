@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">JobSeeker</string>
+    <string name="full_user_name">Nathan Jones</string>
+    <string name="user_phone_number">(555)556–5567</string>
+    <string name="user_email">njones@gmail.com</string>
+    <string name="skills_text">Skills:</string>
+    <string name="skills_chip_placeholder">Java</string>
+    <string name="password_text">Password:</string>
+    <string name="forgot_pw">Forgot?</string>
+    <string name="change_pw">Change?</string>
 </resources>
