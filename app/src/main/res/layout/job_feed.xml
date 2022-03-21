@@ -16,4 +16,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/idFABAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:src="@android:drawable/ic_input_add"
+        app:layout_constraintStart_toEndOf="@+id/jobfeed"
+        app:tint="@color/white"
+        tools:layout_editor_absoluteY="650dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

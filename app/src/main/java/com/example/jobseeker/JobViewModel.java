@@ -11,7 +11,7 @@ public class JobViewModel extends AndroidViewModel {
     
     private LiveData<List<Job>> allJobs;
     
-    public ViewModel(@NonNull Application application) {
+    public JobViewModel(@NonNull Application application) {
         super(application);
         repository = new JobRepository(application);
         allJobs = repository.getAllJobs();

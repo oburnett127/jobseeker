@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".NewJobActivity">
+
+    <!--edit text for our job name-->
+    <EditText
+        android:id="@+id/idEdtJobName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="Enter Job Name" />
+
+    <!--edit text for our job description-->
+    <EditText
+        android:id="@+id/idEdtJobDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="Enter Job Description" />
+
+    <!--edit text for job description-->
+    <EditText
+        android:id="@+id/idEdtJobDuration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="Job Duration" />
+
+    <!--button for saving data to room database-->
+    <Button
+        android:id="@+id/idBtnSaveJob"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="5dp"
+        android:text="Save your job"
+        android:textAllCaps="false" />
+
+</LinearLayout>

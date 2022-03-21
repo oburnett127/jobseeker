@@ -39,4 +39,15 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    def room_version = "2.4.2"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-rxjava2:$room_version"
+    implementation "androidx.room:room-rxjava3:$room_version"
+    implementation "androidx.room:room-guava:$room_version"
+    testImplementation "androidx.room:room-testing:$room_version"
+    implementation "androidx.room:room-paging:2.5.0-alpha01"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.2.0"
+
 }
