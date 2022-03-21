@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.jobseeker.databinding.JobFeedBinding;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class JobFeedActivity extends AppCompatActivity {
 
@@ -24,7 +25,7 @@ public class JobFeedActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         Job[] jobs = getJobs(NUM_OF_POSTS);
 
-        JobAdapter adapter = new JobAdapter(getLayoutInflater(), jobs);
+        JobRVAdapter adapter = new JobRVAdapter();
 
         binding.jobfeed.setLayoutManager(new LinearLayoutManager(this));
         binding.jobfeed.setAdapter(adapter);
@@ -48,6 +49,6 @@ public class JobFeedActivity extends AppCompatActivity {
         String desc = "Job Desc #" + index + "\n- Duties: lorem ipsum\n- Pay: $100,000\n- Requirements: lorem ipsum";
         String date = "01/01/2001";
 
-        return new Job(emp, title, desc, date);
+        return new Job(index, emp, title, desc, date);
     }
 }
