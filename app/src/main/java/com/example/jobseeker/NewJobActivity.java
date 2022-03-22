@@ -6,81 +6,103 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import com.example.jobseeker.databinding.ActivityNewJobBinding;
 
 public class NewJobActivity extends AppCompatActivity {
-
-    // creating a variables for our button and edittext.
-    private EditText jobNameEdt, jobDescEdt, jobDurationEdt;
+    protected ActivityNewJobBinding binding;
+    private EditText jobTitleEdt, jobByLineEdt, jobDescEdt;
     private Button jobBtn;
+    private static final int ADD_JOB_REQUEST = 1;
+    private static final int EDIT_JOB_REQUEST = 2;
 
-    // creating a constant string variable for our 
-    // job name, description and duration.
-    public static final String EXTRA_ID = "com.gtappdevelopers.gfgroomdatabase.EXTRA_ID";
-    public static final String EXTRA_JOB_NAME = "com.gtappdevelopers.gfgroomdatabase.EXTRA_JOB_NAME";
-    public static final String EXTRA_DESCRIPTION = "com.gtappdevelopers.gfgroomdatabase.EXTRA_JOB_DESCRIPTION";
-    public static final String EXTRA_DURATION = "com.gtappdevelopers.gfgroomdatabase.EXTRA_JOB_DURATION";
+//    public static final String EXTRA_JOB_ID = "com.example.jobseeker.EXTRA_ID";
+//    public static final String EXTRA_JOB_TITLE = "com.example.jobseeker.EXTRA_JOB_TITLE";
+//    public static final String EXTRA_JOB_BYLINE = "com.example.jobseeker.EXTRA_JOB_BYLINE";
+//    public static final String EXTRA_JOB_DESC = "com.example.jobseeker.EXTRA_JOB_DESC";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_job);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_new_job);
 
-        // initializing our variables for each view.
-        jobNameEdt = findViewById(R.id.idEdtJobName);
-        jobDescEdt = findViewById(R.id.idEdtJobDescription);
-        jobDurationEdt = findViewById(R.id.idEdtJobDuration);
-        jobBtn = findViewById(R.id.idBtnSaveJob);
+        jobTitleEdt = binding.idEdtJobTitle;
+        jobByLineEdt = binding.idEdtJobByLine;
+        jobDescEdt = binding.idEdtJobDesc
+        jobBtn = binding.idBtnSaveJob
 
-        // below line is to get intent as we
-        // are getting data via an intent.
         Intent intent = getIntent();
-        if (intent.hasExtra(EXTRA_ID)) {
-            // if we get id for our data then we are
-            // setting values to our edit text fields.
-            jobNameEdt.setText(intent.getStringExtra(EXTRA_JOB_NAME));
-            jobDescEdt.setText(intent.getStringExtra(EXTRA_DESCRIPTION));
-            jobDurationEdt.setText(intent.getStringExtra(EXTRA_DURATION));
-        }
-        // adding on click listener for our save button.
+
+//        if (intent.hasExtra(EXTRA_JOB_ID)) {
+//            jobTitleEdt.setText(intent.getStringExtra(EXTRA_JOB_TITLE));
+//            jobByLineEdt.setText(intent.getStringExtra(EXTRA_JOB_BYLINE));
+//            jobDescEdt.setText(intent.getStringExtra(EXTRA_JOB_DESC));
+//        }
+
         jobBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // getting text value from edittext and validating if
-                // the text fields are empty or not.
-                String jobName = jobNameEdt.getText().toString();
+                String jobTitle = jobTitleEdt.getText().toString();
+                String jobByLine = jobByLineEdt.getText().toString();
                 String jobDesc = jobDescEdt.getText().toString();
-                String jobDuration = jobDurationEdt.getText().toString();
-                if (jobName.isEmpty() || jobDesc.isEmpty() || jobDuration.isEmpty()) {
+
+                if (jobTitle.isEmpty() || jobByLine.isEmpty() || jobDesc.isEmpty()) {
                     Toast.makeText(NewJobActivity.this, "Please enter the valid job details.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                // calling a method to save our job.
-                saveJob(jobName, jobDesc, jobDuration);
+
+                saveJob(jobTitle, jobByLine, jobDesc);
             }
         });
     }
 
-    private void saveJob(String jobName, String jobDescription, String jobDuration) {
-        // inside this method we are passing 
-        // all the data via an intent.
-        Intent data = new Intent();
+//    private void saveJob(String jobTitle, String jobByLine, String jobDesc) {
+//        Intent data = new Intent();
+//        data.putExtra(EXTRA_JOB_TITLE, jobTitle);
+//        data.putExtra(EXTRA_JOB_BYLINE, jobByLine);
+//        data.putExtra(EXTRA_JOB_DESC, jobDesc);
+//        int id = getIntent().getIntExtra(EXTRA_JOB_ID, -1);
+//        if (id != -1) {
+//            data.putExtra(EXTRA_JOB_ID, id);
+//        }
+//
+//        setResult(RESULT_OK, data);
+//
+//        Toast.makeText(this, "Your job has been saved", Toast.LENGTH_SHORT).show();
+//    }
 
-        // in below line we are passing all our job detail.
-        data.putExtra(EXTRA_JOB_NAME, jobName);
-        data.putExtra(EXTRA_DESCRIPTION, jobDescription);
-        data.putExtra(EXTRA_DURATION, jobDuration);
-        int id = getIntent().getIntExtra(EXTRA_ID, -1);
-        if (id != -1) {
-            // in below line we are passing our id.
-            data.putExtra(EXTRA_ID, id);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ADD_JOB_REQUEST && resultCode == RESULT_OK) {
+            String jobName = data.getStringExtra(NewJobActivity.EXTRA_JOB_NAME);
+            String jobDescription = data.getStringExtra(NewJobActivity.EXTRA_DESCRIPTION);
+            String jobDuration = data.getStringExtra(NewJobActivity.EXTRA_DURATION);
+
+            Job model = new Job(jobName, jobDescription, jobDuration);
+
+            viewModel.insert(model);
+
+            Toast.makeText(this, "Job saved", Toast.LENGTH_SHORT).show();
+
+        } else if (requestCode == EDIT_JOB_REQUEST && resultCode == RESULT_OK) {
+            int id = data.getIntExtra(NewJobActivity.EXTRA_ID, -1);
+            if (id == -1) {
+                Toast.makeText(this, "Job can't be updated", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            String jobName = data.getStringExtra(NewJobActivity.EXTRA_JOB_NAME);
+            String jobDesc = data.getStringExtra(NewJobActivity.EXTRA_DESCRIPTION);
+            String jobDuration = data.getStringExtra(NewJobActivity.EXTRA_DURATION);
+            Job model = new Job(jobName, jobDesc, jobDuration);
+            model.setId(id);
+            viewModel.update(model);
+            Toast.makeText(this, "Job updated", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Job not saved", Toast.LENGTH_SHORT).show();
         }
-
-        // at last we are setting result as data.
-        setResult(RESULT_OK, data);
-
-        // displaying a toast message after adding the data
-        Toast.makeText(this, "Job has been saved to Room Database. ", Toast.LENGTH_SHORT).show();
     }
 }

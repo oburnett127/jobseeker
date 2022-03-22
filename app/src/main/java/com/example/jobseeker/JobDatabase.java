@@ -32,7 +32,6 @@ public abstract class JobDatabase extends RoomDatabase {
         }
     };
 
-    // we are creating an async task class to perform task in background.
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
         PopulateDbAsyncTask(JobDatabase instance) {
             JobDao dao = instance.JobDao();

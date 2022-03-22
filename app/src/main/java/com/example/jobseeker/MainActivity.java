@@ -22,15 +22,19 @@ public class MainActivity extends AppCompatActivity {
 
     protected ActivityMainBinding binding;
     private Intent listIntent;
-    private RecyclerView coursesRV;
-    private static final int ADD_COURSE_REQUEST = 1;
-    private static final int EDIT_COURSE_REQUEST = 2;
-    private ViewModel viewmodel;
+    private RecyclerView jobsRV;
+    private static final int ADD_JOB_REQUEST = 1;
+    private static final int EDIT_JOB_REQUEST = 2;
+    private ViewModel viewmMdel;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
+        FloatingActionButton fab = binding.idFABAdd;
+
         binding.userProfileButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,6 +44,16 @@ public class MainActivity extends AppCompatActivity {
 
         // open jobs feed page once user clicks jobFeed button
         binding.jobFeedButton.setOnClickListener(v -> openJobFeed());
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // starting a new activity for adding a new job
+                // and passing a constant value in it.
+                Intent intent = new Intent(MainActivity.this, NewJobActivity.class);
+                startActivityForResult(intent, ADD_JOB_REQUEST);
+            }
+        });
     }
 
     private void openUserProfile() {

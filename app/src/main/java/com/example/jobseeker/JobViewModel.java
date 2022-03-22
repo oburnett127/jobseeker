@@ -17,16 +17,16 @@ public class JobViewModel extends AndroidViewModel {
         allJobs = repository.getAllJobs();
     }
     
-    public void insert(Job model) {
-        repository.insert(model);
+    public void insert(Job job) {
+        repository.insert(job);
     }
     
-    public void update(Job model) {
-        repository.update(model);
+    public void update(Job job) {
+        repository.update(job);
     }
     
-    public void delete(Job model) {
-        repository.delete(model);
+    public void delete(Job job) {
+        repository.delete(job);
     }
     
     public LiveData<List<Job>> getAllJobs() {
