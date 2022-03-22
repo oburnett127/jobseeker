@@ -5,9 +5,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.jobseeker.databinding.JobFeedBinding;
 
 public class JobRVAdapter extends ListAdapter<Job, JobRVAdapter.ViewHolder> {
     private OnItemClickListener listener;
@@ -42,10 +44,10 @@ public class JobRVAdapter extends ListAdapter<Job, JobRVAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Job model = getJobAt(position);
-        holder.jobTitleTV.setText(model.getTitle());
-        holder.jobByLineTV.setText(model.getEmployer() + " - " + model.getPostDate());
-        holder.jobDescTV.setText(model.getDesc());
+        Job job = getJobAt(position);
+        holder.jobTitleTV.setText(job.getTitle());
+        holder.jobByLineTV.setText(job.getEmployer() + " - " + job.getPostDate());
+        holder.jobDescTV.setText(job.getDesc());
     }
 
     public Job getJobAt(int position) {
@@ -54,6 +56,7 @@ public class JobRVAdapter extends ListAdapter<Job, JobRVAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView jobTitleTV, jobByLineTV, jobDescTV;
+        JobFeedBinding binding;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -19,11 +19,6 @@ public class NewJobActivity extends AppCompatActivity {
     private static final int ADD_JOB_REQUEST = 1;
     private static final int EDIT_JOB_REQUEST = 2;
 
-//    public static final String EXTRA_JOB_ID = "com.example.jobseeker.EXTRA_ID";
-//    public static final String EXTRA_JOB_TITLE = "com.example.jobseeker.EXTRA_JOB_TITLE";
-//    public static final String EXTRA_JOB_BYLINE = "com.example.jobseeker.EXTRA_JOB_BYLINE";
-//    public static final String EXTRA_JOB_DESC = "com.example.jobseeker.EXTRA_JOB_DESC";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,16 +40,7 @@ public class NewJobActivity extends AppCompatActivity {
         jobBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String jobTitle = jobTitleEdt.getText().toString();
-                String jobByLine = jobByLineEdt.getText().toString();
-                String jobDesc = jobDescEdt.getText().toString();
-
-                if (jobTitle.isEmpty() || jobByLine.isEmpty() || jobDesc.isEmpty()) {
-                    Toast.makeText(NewJobActivity.this, "Please enter the valid job details.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                saveJob(jobTitle, jobByLine, jobDesc);
+                //get contents of edit text boxes, validate and call save
             }
         });
     }
@@ -78,11 +64,17 @@ public class NewJobActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == ADD_JOB_REQUEST && resultCode == RESULT_OK) {
-            String jobName = data.getStringExtra(NewJobActivity.EXTRA_JOB_NAME);
-            String jobDescription = data.getStringExtra(NewJobActivity.EXTRA_DESCRIPTION);
-            String jobDuration = data.getStringExtra(NewJobActivity.EXTRA_DURATION);
+            String employer = data.getStringExtra(binding.idEdtJobTitle.getText().toString());
+            String title = data.getStringExtra(binding.idEdtJobTitle.getText().toString());
+            String desc = data.getStringExtra(binding.idEdtJobDesc.getText().toString());
 
-            Job model = new Job(jobName, jobDescription, jobDuration);
+
+            if (employer.isEmpty() || title.isEmpty() || desc.isEmpty()) {
+                Toast.makeText(NewJobActivity.this, "You must enter a value in all required fields, marked with an *.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            Job model = new Job(jobEmployer, jobTitle, jobByLine, jobDesc, jobPostDate);
 
             viewModel.insert(model);
 
@@ -94,10 +86,10 @@ public class NewJobActivity extends AppCompatActivity {
                 Toast.makeText(this, "Job can't be updated", Toast.LENGTH_SHORT).show();
                 return;
             }
-            String jobName = data.getStringExtra(NewJobActivity.EXTRA_JOB_NAME);
-            String jobDesc = data.getStringExtra(NewJobActivity.EXTRA_DESCRIPTION);
-            String jobDuration = data.getStringExtra(NewJobActivity.EXTRA_DURATION);
-            Job model = new Job(jobName, jobDesc, jobDuration);
+            String jobTitle = data.getStringExtra(NewJobActivity.EXTRA_JOB_NAME);
+            String jobByLine = data.getStringExtra(NewJobActivity.EXTRA_DESCRIPTION);
+            String jobDesc = data.getStringExtra(NewJobActivity.EXTRA_DURATION);
+            Job model = new Job(jobTitle, jobDesc, jobDesc);
             model.setId(id);
             viewModel.update(model);
             Toast.makeText(this, "Job updated", Toast.LENGTH_SHORT).show();

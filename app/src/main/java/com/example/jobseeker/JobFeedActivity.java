@@ -24,33 +24,12 @@ public class JobFeedActivity extends AppCompatActivity {
 
         final JobFeedBinding binding = JobFeedBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        //Job[] jobs = getJobs(NUM_OF_POSTS);
 
         JobRVAdapter adapter = new JobRVAdapter();
 
         binding.jobfeed.setLayoutManager(new LinearLayoutManager(this));
         binding.jobfeed.setAdapter(adapter);
 
-    }
-
-    // TODO remove or modify these two methods after job CRUD is implemented
-    private Job[] getJobs(int numOfJobs){
-        Job[] jobs = new Job[numOfJobs];
-
-        for(int i=0; i<jobs.length; i++){
-            jobs[i] = generateFakeJob(i);
-        }
-
-        return jobs;
-    }
-
-    private Job generateFakeJob(int index){
-        String emp = "Employer #" + index;
-        String title = "Sample Job Title #" + index;
-        String desc = "Job Desc #" + index + "\n- Duties: lorem ipsum\n- Pay: $100,000\n- Requirements: lorem ipsum";
-        String date = "01/01/2001";
-
-        return new Job(index, emp, title, desc, date);
     }
 }
 
