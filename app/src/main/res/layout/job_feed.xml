@@ -23,8 +23,12 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:src="@android:drawable/ic_input_add"
-        app:layout_constraintStart_toEndOf="@+id/jobfeed"
-        app:tint="@color/white"
-        tools:layout_editor_absoluteY="650dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/jobfeed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:tint="@color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
