@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import com.example.jobseeker.databinding.ActivityNewJobBinding;
 
+import java.util.Date;
+
 public class NewJobActivity extends AppCompatActivity {
     protected ActivityNewJobBinding binding;
     private EditText jobTitleEdt, jobByLineEdt, jobDescEdt;
@@ -26,16 +28,10 @@ public class NewJobActivity extends AppCompatActivity {
 
         jobTitleEdt = binding.idEdtJobTitle;
         jobByLineEdt = binding.idEdtJobByLine;
-        jobDescEdt = binding.idEdtJobDesc
-        jobBtn = binding.idBtnSaveJob
+        jobDescEdt = binding.idEdtJobDesc;
+        jobBtn = binding.idBtnSaveJob;
 
         Intent intent = getIntent();
-
-//        if (intent.hasExtra(EXTRA_JOB_ID)) {
-//            jobTitleEdt.setText(intent.getStringExtra(EXTRA_JOB_TITLE));
-//            jobByLineEdt.setText(intent.getStringExtra(EXTRA_JOB_BYLINE));
-//            jobDescEdt.setText(intent.getStringExtra(EXTRA_JOB_DESC));
-//        }
 
         jobBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,21 +41,6 @@ public class NewJobActivity extends AppCompatActivity {
         });
     }
 
-//    private void saveJob(String jobTitle, String jobByLine, String jobDesc) {
-//        Intent data = new Intent();
-//        data.putExtra(EXTRA_JOB_TITLE, jobTitle);
-//        data.putExtra(EXTRA_JOB_BYLINE, jobByLine);
-//        data.putExtra(EXTRA_JOB_DESC, jobDesc);
-//        int id = getIntent().getIntExtra(EXTRA_JOB_ID, -1);
-//        if (id != -1) {
-//            data.putExtra(EXTRA_JOB_ID, id);
-//        }
-//
-//        setResult(RESULT_OK, data);
-//
-//        Toast.makeText(this, "Your job has been saved", Toast.LENGTH_SHORT).show();
-//    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -67,14 +48,14 @@ public class NewJobActivity extends AppCompatActivity {
             String employer = data.getStringExtra(binding.idEdtJobTitle.getText().toString());
             String title = data.getStringExtra(binding.idEdtJobTitle.getText().toString());
             String desc = data.getStringExtra(binding.idEdtJobDesc.getText().toString());
-
+            Date date = new Date();
 
             if (employer.isEmpty() || title.isEmpty() || desc.isEmpty()) {
                 Toast.makeText(NewJobActivity.this, "You must enter a value in all required fields, marked with an *.", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            Job model = new Job(jobEmployer, jobTitle, jobByLine, jobDesc, jobPostDate);
+            Job model = new Job(0, employer, title, desc, date.toString());
 
             viewModel.insert(model);
 

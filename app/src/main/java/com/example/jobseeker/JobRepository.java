@@ -10,66 +10,82 @@ public class JobRepository {
     private LiveData<List<Job>> allJobs;
     
     public JobRepository(Application application) {
-        JobDatabase database = JobDatabase.getInstance(application);
-        jobDao = database.JobDao();
+        JobDatabase db = JobDatabase.getDatabase(application);
+        jobDao = db.JobDao();
         allJobs = jobDao.getAll();
     }
-    
-    public void insert(Job job) {
-        new InsertJobAsyncTask(jobDao).execute(job);
-    }
-    
-    public void update(Job job) {
-        new UpdateJobAsyncTask(jobDao).execute(job);
-    }
-    
-    public void delete(Job job) {
-        new DeleteJobAsyncTask(jobDao).execute(job);
-    }
-    
-    public LiveData<List<Job>> getAllJobs() {
+
+    public Job get(int id)
+
+    public LiveData<List<Job>> getAll() {
         return allJobs;
     }
 
-    private static class InsertJobAsyncTask extends AsyncTask<Job, Void, Void> {
-        private JobDao jobDao;
-
-        private InsertJobAsyncTask(JobDao jobDao) {
-            this.jobDao = jobDao;
-        }
-
-        @Override
-        protected Void doInBackground(Job... job) {
-            jobDao.insertAll(job[0]);
-            return null;
-        }
+    public void insert(Job job) {
+        JobRoomDatabase.databaseWriteExecutor.execute(() -> jobDao.insert(job));
+    }
+    public LiveData<Job> get(int id) {
+        return jobDao.get(id);
+    }
+    public void update(Job job) {
+        JobDatabase.databaseWriteExecutor.execute(() -> jobDao.updateAll(job));
+    }
+    public void delete(Job job) {
+        JobDatabase.databaseWriteExecutor.execute(() -> jobDao.deleteAll(job));
     }
 
-    private static class UpdateJobAsyncTask extends AsyncTask<Job, Void, Void> {
-        private JobDao jobDao;
-
-        private UpdateJobAsyncTask(JobDao jobDao) {
-            this.jobDao = jobDao;
-        }
-
-        @Override
-        protected Void doInBackground(Job... jobs) {
-            jobDao.updateAll(jobs[0]);
-            return null;
-        }
-    }
-
-    private static class DeleteJobAsyncTask extends AsyncTask<Job, Void, Void> {
-        private JobDao jobDao;
-
-        private DeleteJobAsyncTask(JobDao jobDao) {
-            this.jobDao = jobDao;
-        }
-
-        @Override
-        protected Void doInBackground(Job... jobs) {
-            jobDao.delete(jobs[0]);
-            return null;
-        }
-    }
+//    we may need this code later on, not sure whether we should do the CRUD operations
+//    asynchronously
+//    public void insert(Job job) {
+//        new InsertJobAsyncTask(jobDao).execute(job);
+//}
+//
+//    public void update(Job job) {
+//        new UpdateJobAsyncTask(jobDao).execute(job);
+//    }
+//
+//    public void delete(Job job) {
+//        new DeleteJobAsyncTask(jobDao).execute(job);
+//    }
+//    private static class InsertJobAsyncTask extends AsyncTask<Job, Void, Void> {
+//        private JobDao jobDao;
+//
+//        private InsertJobAsyncTask(JobDao jobDao) {
+//            this.jobDao = jobDao;
+//        }
+//
+//        @Override
+//        protected Void doInBackground(Job... job) {
+//            jobDao.insertAll(job[0]);
+//            return null;
+//        }
+//    }
+//
+//    private static class UpdateJobAsyncTask extends AsyncTask<Job, Void, Void> {
+//        private JobDao jobDao;
+//
+//        private UpdateJobAsyncTask(JobDao jobDao) {
+//            this.jobDao = jobDao;
+//        }
+//
+//        @Override
+//        protected Void doInBackground(Job... jobs) {
+//            jobDao.updateAll(jobs[0]);
+//            return null;
+//        }
+//    }
+//
+//    private static class DeleteJobAsyncTask extends AsyncTask<Job, Void, Void> {
+//        private JobDao jobDao;
+//
+//        private DeleteJobAsyncTask(JobDao jobDao) {
+//            this.jobDao = jobDao;
+//        }
+//
+//        @Override
+//        protected Void doInBackground(Job... jobs) {
+//            jobDao.delete(jobs[0]);
+//            return null;
+//        }
+//    }
 }

@@ -20,6 +20,12 @@ public class JobViewModel extends AndroidViewModel {
     public void insert(Job job) {
         repository.insert(job);
     }
+
+    public LiveData<Job> get(int id) { return repository.get(id);}
+
+    public LiveData<List<Job>> getAllJobs() {
+        return allJobs;
+    }
     
     public void update(Job job) {
         repository.update(job);
@@ -27,9 +33,5 @@ public class JobViewModel extends AndroidViewModel {
     
     public void delete(Job job) {
         repository.delete(job);
-    }
-    
-    public LiveData<List<Job>> getAllJobs() {
-        return allJobs;
     }
 }

@@ -8,37 +8,64 @@ import androidx.room.Room;
 import androidx.annotation.NonNull;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {Job.class}, version = 1)
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+@Database(entities = {Job.class}, version = 1, exportSchema = true) {
 public abstract class JobDatabase extends RoomDatabase {
-    private static JobDatabase instance;
-    public abstract JobDao JobDao();
+    public static final int NUMBER_OF_THREADS = 4;
+    public static final ExecutorService databaseWriteExecutor
+            = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+    private static volatile JobDatabase INSTANCE;
+    private static final RoomDatabase.Callback sRoomDatabaseCallback =
+            new RoomDatabase.Callback() {
+                @Override
+                public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                    super.onCreate(db);
 
-    public static synchronized JobDatabase getInstance(Context context) {
-        if (instance == null) {
-            instance = Room.databaseBuilder(context.getApplicationContext(),
-                            JobDatabase.class, "jobseeker").fallbackToDestructiveMigration()
-                            .addCallback(roomCallback)
+                    databaseWriteExecutor.execute(() -> {
+                        JobDao jobDao = INSTANCE.jobDao();
+
+                        Job job = new Job(1, "New Technology Explorers", "Software Developer",
+                                                "We need someone who can build software from the ground up. " +
+                                                    "The right candidate must have backend, frontend and cloud " +
+                                                    "provider experience.",
+                                                    "20220301");
+                        jobDao.insert(job);
+
+                        job = new Job(2, "Software Innovations Corp", "Software Engineer",
+                                            "Our next Software Engineer must have extensive hands on " +
+                                                    "experience with implementing software using industry " +
+                                                    "standard design patterns.",
+                                                    "20220302");
+                        jobDao.insert(job);
+
+                        job = new Job(3, "Web Developers On Call", "Web Developer I",
+                                                "This is an entry level web development position. No experience " +
+                                                      "necessary. We will provide a laptop. $3000 sign on bonus. " +
+                                                        "You must know how to operate a computer.",
+                                                "20220303");
+                        jobDao.insert(job);
+
+
+                    });
+                }
+            };
+
+    public static JobDatabase getDatabase(final Context context) {
+        if (INSTANCE == null) {
+            synchronized (JobDatabase.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
+                            JobDatabase.class, "job_database")
+                            .addCallback(sRoomDatabaseCallback)
                             .build();
+                }
+            }
         }
-        return instance;
+
+        return INSTANCE;
     }
 
-    private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback() {
-        @Override
-        public void onCreate(@NonNull SupportSQLiteDatabase db) {
-            super.onCreate(db);
-
-            new PopulateDbAsyncTask(instance).execute();
-        }
-    };
-
-    private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
-        PopulateDbAsyncTask(JobDatabase instance) {
-            JobDao dao = instance.JobDao();
-        }
-        @Override
-        protected Void doInBackground(Void... voids) {
-            return null;
-        }
-    }
+    public abstract JobDao jobDao();
 }

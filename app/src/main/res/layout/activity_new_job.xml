@@ -1,39 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".NewJobActivity">
 
-    <EditText
-        android:id="@+id/idEdtJobTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:hint="Enter Job Title" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/idEdtJobByLine"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:hint="Enter Employer Name" />
+            <EditText
+                android:id="@+id/idEdtJobTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginBottom="48dp"
+                android:hint="Enter Job Title"
+                android:minHeight="48dp"
+                app:layout_constraintBottom_toTopOf="@+id/idEdtJobDesc"
+                tools:layout_editor_absoluteX="16dp" />
 
-    <EditText
-        android:id="@+id/idEdtJobDesc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:hint="Enter Job Description" />
+            <EditText
+                android:id="@+id/idEdtJobByLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="48dp"
+                android:hint="Enter Employer Name"
+                android:minHeight="48dp"
+                app:layout_constraintBottom_toTopOf="@+id/idEdtJobTitle"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="10dp" />
 
-    <Button
-        android:id="@+id/idBtnSaveJob"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="5dp"
-        android:text="Save your job"
-        android:textAllCaps="false" />
+            <EditText
+                android:id="@+id/idEdtJobDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:hint="Enter Job Description"
+                android:minHeight="48dp"
+                tools:layout_editor_absoluteX="9dp"
+                tools:layout_editor_absoluteY="177dp" />
+
+            <Button
+                android:id="@+id/idBtnSaveJob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginBottom="48dp"
+                android:padding="5dp"
+                android:text="Save your job"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/idEdtJobDesc"
+                app:layout_constraintVertical_bias="0.97"
+                tools:layout_editor_absoluteX="16dp" />
+
+        </LinearLayout>
 </layout>

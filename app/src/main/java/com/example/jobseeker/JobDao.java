@@ -20,7 +20,7 @@ public interface JobDao {
     LiveData<List<Job>> getAll();
 
     @Query("SELECT * FROM job WHERE id IN (:jobIds)")
-    List<Job> loadAllByIds(int[] jobIds);
+    List<Job> getByIds(int[] jobIds);
 
     @Query("SELECT * FROM job WHERE employer LIKE :employer AND " +
             "title LIKE :title LIMIT 1")
