@@ -11,7 +11,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Job.class}, version = 1, exportSchema = true) {
+@Database(entities = {Job.class}, version = 1, exportSchema = true)
 public abstract class JobDatabase extends RoomDatabase {
     public static final int NUMBER_OF_THREADS = 4;
     public static final ExecutorService databaseWriteExecutor

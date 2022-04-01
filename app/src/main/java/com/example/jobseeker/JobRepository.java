@@ -11,27 +11,28 @@ public class JobRepository {
     
     public JobRepository(Application application) {
         JobDatabase db = JobDatabase.getDatabase(application);
-        jobDao = db.JobDao();
+        jobDao = db.jobDao();
         allJobs = jobDao.getAll();
     }
 
-    public Job get(int id)
+    public LiveData<Job> get(int id) {
+        return jobDao.get(id);
+    }
 
     public LiveData<List<Job>> getAll() {
         return allJobs;
     }
 
     public void insert(Job job) {
-        JobRoomDatabase.databaseWriteExecutor.execute(() -> jobDao.insert(job));
+        JobDatabase.databaseWriteExecutor.execute(() -> jobDao.insertAll(job));
     }
-    public LiveData<Job> get(int id) {
-        return jobDao.get(id);
-    }
+
     public void update(Job job) {
         JobDatabase.databaseWriteExecutor.execute(() -> jobDao.updateAll(job));
     }
+
     public void delete(Job job) {
-        JobDatabase.databaseWriteExecutor.execute(() -> jobDao.deleteAll(job));
+        JobDatabase.databaseWriteExecutor.execute(() -> jobDao.delete(job));
     }
 
 //    we may need this code later on, not sure whether we should do the CRUD operations

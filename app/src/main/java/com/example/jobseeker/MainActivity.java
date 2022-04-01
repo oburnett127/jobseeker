@@ -42,24 +42,27 @@ public class MainActivity extends AppCompatActivity {
                 .create(JobViewModel.class);
 
         jobViewModel.getAllJobs().observe(this, jobs -> {
-           jobRVAdapter = new JobRVAdapter(jobs, MainActivity.this, this);
-           jobsRV.setAdapter(jobRVAdapter);
+            jobRVAdapter = new JobRVAdapter(jobs, MainActivity.this, this);
+            jobsRV.setAdapter(jobRVAdapter);
         });
 
-        binding.userProfileButton.setOnClickListener(view-> {
+        binding.userProfileButton.setOnClickListener(view -> {
             Intent displayUserProfileIntent = new Intent(this, UserProfileActivity.class);
             startActivity(displayUserProfileIntent);
         });
 
-        binding.jobFeedButton.setOnClickListener(view-> {
+        binding.jobFeedButton.setOnClickListener(view -> {
             Intent jobFeedIntent = new Intent(this, JobFeedActivity.class);
             startActivity(jobFeedIntent);
         });
 
-        binding.jobAddFab.setOnClickListener(view-> {
+        binding.jobAddFab.setOnClickListener(view -> {
             Intent jobAddIntent = new Intent(this, NewJobActivity.class);
             startActivity(jobAddIntent);
         });
+    }
+}
+
 //        we may need this code in the future
 //        //below method is use to add swipe to delete method for item of recycler view.
 //        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -89,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 //                    startActivityForResult(intent);
 //            }
 //        });
-    }
+//    }
 
 //    private void openUserProfile() {
 //        listIntent = new Intent(this, UserProfileActivity.class);
@@ -100,4 +103,4 @@ public class MainActivity extends AppCompatActivity {
 //        listIntent = new Intent(this, JobFeedActivity.class);
 //        startActivity(listIntent);
 //    }
-}
+//}
