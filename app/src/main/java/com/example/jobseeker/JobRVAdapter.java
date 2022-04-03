@@ -6,12 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.jobseeker.databinding.JobFeedBinding;
-
 import java.util.List;
 import java.util.Objects;
 
@@ -20,7 +15,7 @@ public class JobRVAdapter extends RecyclerView.Adapter<JobRVAdapter.ViewHolder> 
     private final Context context;
     private final OnJobClickListener jobClickListener;
 
-    public RecyclerViewAdapter(List<Job> jobList, Context context, OnJobClickListener onJobClickListener) {
+    public JobRVAdapter(List<Job> jobList, Context context, OnJobClickListener onJobClickListener) {
         this.jobList = jobList;
         this.context = context;
         this.jobClickListener = onJobClickListener;
@@ -31,7 +26,7 @@ public class JobRVAdapter extends RecyclerView.Adapter<JobRVAdapter.ViewHolder> 
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //Why attachToRoot is false: https://stackoverflow.com/a/45809756
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.job_feed, parent, false);
+                .inflate(R.layout.activity_job_feed, parent, false);
         return new ViewHolder(view, jobClickListener);
     }
 
@@ -67,7 +62,7 @@ public class JobRVAdapter extends RecyclerView.Adapter<JobRVAdapter.ViewHolder> 
 
         @Override
         public void onClick(View view) {
-            onContactClickListener.onContactClick(getAdapterPosition());
+            onJobClickListener.onJobClick(getAdapterPosition());
         }
     }
 }

@@ -31,21 +31,21 @@ public abstract class JobDatabase extends RoomDatabase {
                                                     "The right candidate must have backend, frontend and cloud " +
                                                     "provider experience.",
                                                     "20220301");
-                        jobDao.insert(job);
+                        jobDao.insertAll(job);
 
                         job = new Job(2, "Software Innovations Corp", "Software Engineer",
                                             "Our next Software Engineer must have extensive hands on " +
                                                     "experience with implementing software using industry " +
                                                     "standard design patterns.",
                                                     "20220302");
-                        jobDao.insert(job);
+                        jobDao.insertAll(job);
 
                         job = new Job(3, "Web Developers On Call", "Web Developer I",
                                                 "This is an entry level web development position. No experience " +
                                                       "necessary. We will provide a laptop. $3000 sign on bonus. " +
                                                         "You must know how to operate a computer.",
                                                 "20220303");
-                        jobDao.insert(job);
+                        jobDao.insertAll(job);
 
 
                     });
