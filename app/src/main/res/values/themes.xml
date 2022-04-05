@@ -14,12 +14,22 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="UserInfo" >
+    <style name="UserInfo">
         <!-- Primary brand color. -->
         <item name="android:textSize">24sp</item>
     </style>
+
     <style name="UserInfo.Details" parent="UserInfo">
         <!-- Primary brand color. -->
         <item name="android:textSize">18sp</item>
     </style>
+
+    <style name="Theme.JobSeeker.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.JobSeeker.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.JobSeeker.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
