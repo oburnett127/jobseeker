@@ -4,9 +4,10 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.jobseeker.databinding.ActivityJobDisplayBinding;
 
-public class activity_job_display extends AppCompatActivity {
+public class JobDisplayActivity extends AppCompatActivity {
 
     private ActivityJobDisplayBinding binding;
+    private String JOB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,9 +15,11 @@ public class activity_job_display extends AppCompatActivity {
 
         binding = ActivityJobDisplayBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        JOB = savedInstanceState.getString(JOB);
 
 
     }
+}
 //
 //        setSupportActionBar(binding.toolbar);
 //

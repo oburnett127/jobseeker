@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     protected ActivityMainBinding binding;
     private RecyclerView jobRV;
     private JobRVAdapter jobRVAdapter;
-    private JobViewModel jobViewModel;
+    public static JobViewModel jobViewModel;
     private static final int ADD_JOB_REQUEST = 1;
     private static final int EDIT_JOB_REQUEST = 2;
 

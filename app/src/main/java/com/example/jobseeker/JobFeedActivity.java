@@ -11,13 +11,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.jobseeker.databinding.JobFeedBinding;
-
 import java.util.List;
 import java.util.Objects;
 
 public class JobFeedActivity extends AppCompatActivity implements JobRVAdapter.OnJobClickListener {
-    //private static final String TAG = "Clicked";
     public static final String JOB_ID = "job_id";
     private JobViewModel jobViewModel;
     private TextView textView;
@@ -59,7 +56,7 @@ public class JobFeedActivity extends AppCompatActivity implements JobRVAdapter.O
         //Log.d(TAG, "onJobClick: " + job.getId());
 
         Intent intent = new Intent(JobFeedActivity.this, JobDisplayActivity.class);
-        intent.putExtra(JOB_ID, job.getId());
+        intent.putExtra(JobDisplayActivity.JOB, job);
 //        intent.putExtra(JobDisplayActivity.JOB_TITLE, job.getTitle());
 //        intent.putExtra(JobDisplayActivity.JOB_EMPLOYER, job.getEmployer());
 //        intent.putExtra(JobDisplayActivity.JOB_DESC, job.getDesc());

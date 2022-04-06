@@ -51,31 +51,34 @@ public class NewJobActivity extends AppCompatActivity {
             Date date = new Date();
 
             if (employer.isEmpty() || title.isEmpty() || desc.isEmpty()) {
-                Toast.makeText(NewJobActivity.this, "You must enter a value in all required fields, marked with an *.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(NewJobActivity.this,
+                        "You must enter a value in all required fields, marked with an *.",
+                        Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            Job model = new Job(0, employer, title, desc, date.toString());
+            Job job = new Job(0, employer, title, desc, date.toString());
 
-            viewModel.insert(model);
+            MainActivity.jobViewModel.insert(job);
 
             Toast.makeText(this, "Job saved", Toast.LENGTH_SHORT).show();
-
-        } else if (requestCode == EDIT_JOB_REQUEST && resultCode == RESULT_OK) {
-            int id = data.getIntExtra(NewJobActivity.EXTRA_ID, -1);
-            if (id == -1) {
-                Toast.makeText(this, "Job can't be updated", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            String jobTitle = data.getStringExtra(NewJobActivity.EXTRA_JOB_NAME);
-            String jobByLine = data.getStringExtra(NewJobActivity.EXTRA_DESCRIPTION);
-            String jobDesc = data.getStringExtra(NewJobActivity.EXTRA_DURATION);
-            Job model = new Job(jobTitle, jobDesc, jobDesc);
-            model.setId(id);
-            viewModel.update(model);
-            Toast.makeText(this, "Job updated", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "Job not saved", Toast.LENGTH_SHORT).show();
         }
     }
 }
+
+//May need this code when we implement job update feature
+//} else if (requestCode == EDIT_JOB_REQUEST && resultCode == RESULT_OK) {
+//        int id = data.getIntExtra(NewJobActivity.EXTRA_ID, -1);
+//        if (id == -1) {
+//        Toast.makeText(this, "Job can't be updated", Toast.LENGTH_SHORT).show();
+//        return;
+//        }
+//        String jobTitle = data.getStringExtra(NewJobActivity.EXTRA_JOB_NAME);
+//        String jobByLine = data.getStringExtra(NewJobActivity.EXTRA_DESCRIPTION);
+//        String jobDesc = data.getStringExtra(NewJobActivity.EXTRA_DURATION);
+//        Job job = new Job(jobTitle, jobDesc, jobDesc);
+//        job.setId(id);
+//        MainActivity.jobViewModel.update(job);
+//        Toast.makeText(this, "Job updated", Toast.LENGTH_SHORT).show();
