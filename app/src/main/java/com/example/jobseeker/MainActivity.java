@@ -13,20 +13,12 @@ import com.example.jobseeker.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     protected ActivityMainBinding binding;
-    private RecyclerView jobRV;
-    private JobRVAdapter jobRVAdapter;
-    public static JobViewModel jobViewModel;
-    private static final int ADD_JOB_REQUEST = 1;
-    private static final int EDIT_JOB_REQUEST = 2;
+    protected static JobViewModel jobViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        jobRV = findViewById(R.id.jobfeedRV);
-        jobRV.setHasFixedSize(true);
-        jobRV.setLayoutManager(new LinearLayoutManager(this));
-
 
         jobViewModel = new ViewModelProvider.AndroidViewModelFactory(MainActivity.this
                 .getApplication())

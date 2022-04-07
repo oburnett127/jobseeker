@@ -25,12 +25,10 @@ public class NewJobActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_new_job);
-
         jobTitleEdt = binding.idEdtJobTitle;
         jobByLineEdt = binding.idEdtJobByLine;
         jobDescEdt = binding.idEdtJobDesc;
         jobBtn = binding.idBtnSaveJob;
-
         Intent intent = getIntent();
 
         jobBtn.setOnClickListener(new View.OnClickListener() {
@@ -58,9 +56,7 @@ public class NewJobActivity extends AppCompatActivity {
             }
 
             Job job = new Job(0, employer, title, desc, date.toString());
-
             MainActivity.jobViewModel.insert(job);
-
             Toast.makeText(this, "Job saved", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "Job not saved", Toast.LENGTH_SHORT).show();

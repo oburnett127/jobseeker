@@ -1,5 +1,6 @@
 package com.example.jobseeker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.jobseeker.databinding.ActivityJobDisplayBinding;
@@ -7,17 +8,18 @@ import com.example.jobseeker.databinding.ActivityJobDisplayBinding;
 public class JobDisplayActivity extends AppCompatActivity {
 
     private ActivityJobDisplayBinding binding;
-    private String JOB;
+    private Job job;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityJobDisplayBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        JOB = savedInstanceState.getString(JOB);
-
-
+        Intent intent = getIntent();
+        job = (Job)intent.getSerializableExtra("job");
+        binding.title.setText(job.getTitle());
+        binding.byLine.setText(job.getEmployer() + " - " + job.getPostDate());
+        binding.desc.setText(job.getDesc());
     }
 }
 //

@@ -53,13 +53,8 @@ public class JobFeedActivity extends AppCompatActivity implements JobRVAdapter.O
 
     public void onJobClick(int position) {
         Job job = Objects.requireNonNull(jobViewModel.getAllJobs().getValue()).get(position);
-        //Log.d(TAG, "onJobClick: " + job.getId());
-
         Intent intent = new Intent(JobFeedActivity.this, JobDisplayActivity.class);
-        intent.putExtra(JobDisplayActivity.JOB, job);
-//        intent.putExtra(JobDisplayActivity.JOB_TITLE, job.getTitle());
-//        intent.putExtra(JobDisplayActivity.JOB_EMPLOYER, job.getEmployer());
-//        intent.putExtra(JobDisplayActivity.JOB_DESC, job.getDesc());
+        intent.putExtra("job", job);
         startActivity(intent);
     }
 }

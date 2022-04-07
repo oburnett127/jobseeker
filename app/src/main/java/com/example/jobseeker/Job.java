@@ -1,11 +1,15 @@
 package com.example.jobseeker;
 
+import android.os.Parcelable;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "job")
-public class Job {
+public class Job implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private final int id;
     @ColumnInfo(name = "employer")
