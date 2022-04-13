@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected ActivityMainBinding binding;
     protected static JobViewModel jobViewModel;
+    protected JobDatabase jobDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
                 .getApplication())
                 .create(JobViewModel.class);
 
+        JobDatabase jobDatabase = JobDatabase.getDatabase(this);
 //        jobViewModel.getAllJobs().observe(this, jobs -> {
 //            jobRVAdapter = new JobRVAdapter(jobs, MainActivity.this, this);
 //            jobsRV.setAdapter(jobRVAdapter);

@@ -34,7 +34,7 @@ public class NewJobActivity extends AppCompatActivity {
         jobBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //get contents of edit text boxes, validate and call save
+                Toast.makeText(NewJobActivity.this, "Your job has been saved", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -55,8 +55,8 @@ public class NewJobActivity extends AppCompatActivity {
                 return;
             }
 
-            Job job = new Job(0, employer, title, desc, date.toString());
-            MainActivity.jobViewModel.insert(job);
+            //Job job = new Job(0, employer, title, desc, date.toString());
+            //MainActivity.jobViewModel.insert(job);
             Toast.makeText(this, "Job saved", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "Job not saved", Toast.LENGTH_SHORT).show();

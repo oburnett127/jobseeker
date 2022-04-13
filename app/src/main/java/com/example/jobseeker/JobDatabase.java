@@ -22,7 +22,9 @@ public abstract class JobDatabase extends RoomDatabase {
                 @Override
                 public void onCreate(@NonNull SupportSQLiteDatabase db) {
                     super.onCreate(db);
-
+//make sure table structure gets fully created
+//find out how to associate table structures to a database
+                    //may not have any tables inside so it closes the connection
                     databaseWriteExecutor.execute(() -> {
                         JobDao jobDao = INSTANCE.jobDao();
 

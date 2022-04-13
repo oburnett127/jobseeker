@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
@@ -33,9 +35,6 @@ public class JobRVAdapter extends RecyclerView.Adapter<JobRVAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Job job = Objects.requireNonNull(jobList.get(position));
-        holder.jobTitleTV.setText(job.getTitle());
-        holder.jobByLineTV.setText(job.getEmployer() + " - " + job.getPostDate());
-        holder.jobDescTV.setText(job.getDesc());
     }
 
     @Override

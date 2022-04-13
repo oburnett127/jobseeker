@@ -10,6 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JobSeeker">
         <activity
+            android:name=".NewJobActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".NewJobActivity" />
+        </activity>
+        <activity
             android:name=".JobFeedActivity"
             android:exported="false">
             <meta-data
